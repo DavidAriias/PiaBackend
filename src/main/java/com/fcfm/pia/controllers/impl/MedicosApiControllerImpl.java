@@ -1,11 +1,11 @@
 package com.fcfm.pia.controllers.impl;
 
-import com.fcfm.pia.controllers.interfaces.PruebaApiController;
+import com.fcfm.pia.controllers.interfaces.MedicosApiController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PruebaApiControllerImpl implements PruebaApiController {
+public class MedicosApiControllerImpl implements MedicosApiController {
     @Override
     public ResponseEntity<String> getTexto() {
         return null;

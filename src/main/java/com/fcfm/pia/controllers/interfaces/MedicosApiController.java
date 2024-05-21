@@ -4,8 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/prueba")
-public interface PruebaApiController {
+@RequestMapping("/medicos")
+public interface MedicosApiController {
 
     @GetMapping
     ResponseEntity<String> getTexto();
