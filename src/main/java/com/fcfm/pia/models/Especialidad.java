@@ -8,7 +8,6 @@ public class Especialidad {
         this.Id = id;
         this.nombre = nombre;
     }
-
     public String getNombre() {
         return nombre;
     }

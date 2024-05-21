@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "horarios", schema = "public")
 public class HorarioEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_horario")
@@ -64,4 +63,7 @@ public class HorarioEntity {
     public void setMedico(MedicoEntity medico) {
         this.medico = medico;
     }
+
+
+
 }

@@ -2,6 +2,8 @@ package com.fcfm.pia.repository.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "ciudades", schema = "public")
 public class CiudadEntity {
@@ -13,6 +15,9 @@ public class CiudadEntity {
 
     @Column(name = "ciudad")
     private String ciudad;
+
+    @OneToMany(mappedBy = "ciudad")
+    private List<MedicoEntity> medicos;
 
     // Getters y Setters
     public Long getId() {
@@ -29,5 +34,13 @@ public class CiudadEntity {
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
+    }
+
+    public List<MedicoEntity> getMedicos() {
+        return medicos;
+    }
+
+    public void setMedicos(List<MedicoEntity> medicos) {
+        this.medicos = medicos;
     }
 }
