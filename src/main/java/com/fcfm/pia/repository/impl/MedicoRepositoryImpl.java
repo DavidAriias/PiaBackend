@@ -1,10 +1,12 @@
 package com.fcfm.pia.repository.impl;
 
+import com.fcfm.pia.repository.entities.EspecialidadEntity;
 import com.fcfm.pia.repository.entities.MedicoEntity;
 import com.fcfm.pia.repository.interfaces.MedicoRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,19 +18,22 @@ public class MedicoRepositoryImpl implements MedicoRepository {
     private EntityManager em;
     @Override
     public List<MedicoEntity> getMedicosByEspecialidad(Long idEspecialidad) {
-        String jpql = "SELECT m " +
-                "FROM MedicoEntity m " +
-                "JOIN FETCH m.especialidad e " +
-                "JOIN FETCH m.ciudad c " +
-                "JOIN FETCH m.horarios h " +
-                "WHERE e.id = :idEspecialidad " +
-                "ORDER BY m.nombre, h.diaSemana";
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<MedicoEntity> cq = cb.createQuery(MedicoEntity.class);
+        Root<MedicoEntity> medicoRoot = cq.from(MedicoEntity.class);
 
-        TypedQuery<MedicoEntity> query = em.createQuery(jpql, MedicoEntity.class);
-        query.setParameter("idEspecialidad", idEspecialidad);
+        // Fetch de las asociaciones usando las anotaciones definidas en las entidades
+        medicoRoot.fetch("especialidad", JoinType.INNER);
+        medicoRoot.fetch("horario", JoinType.INNER);
+        medicoRoot.fetch("ciudad", JoinType.INNER);
 
-        List<MedicoEntity> medicoEntities = query.getResultList();
+        cq.select(medicoRoot)
+                .distinct(true); // Para evitar resultados duplicados si un médico tiene múltiples especialidades
 
-        return medicoEntities;
+        TypedQuery<MedicoEntity> query = em.createQuery(cq);
+        List<MedicoEntity> medicos = query.getResultList();
+
+        em.close();
+        return medicos;
     }
 }

@@ -15,11 +15,11 @@ public class MedicoEntity {
     private String nombre;
     private String apellidos;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_especialidad")
     private EspecialidadEntity especialidad;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ciudad")
     private CiudadEntity ciudad;
 
