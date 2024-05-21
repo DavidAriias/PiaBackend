@@ -6,8 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MedicosApiControllerImpl implements MedicosApiController {
-    @Override
-    public ResponseEntity<String> getTexto() {
-        return null;
-    }
+
 }
