@@ -1,11 +1,9 @@
 package com.fcfm.pia.repository.impl;
 
-import com.fcfm.pia.repository.entities.EspecialidadEntity;
-import com.fcfm.pia.repository.entities.MedicoEntity;
+import com.fcfm.pia.repository.entities.*;
 import com.fcfm.pia.repository.interfaces.MedicoRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import org.springframework.stereotype.Repository;
 
@@ -18,22 +16,18 @@ public class MedicoRepositoryImpl implements MedicoRepository {
     private EntityManager em;
     @Override
     public List<MedicoEntity> getMedicosByEspecialidad(Long idEspecialidad) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<MedicoEntity> cq = cb.createQuery(MedicoEntity.class);
-        Root<MedicoEntity> medicoRoot = cq.from(MedicoEntity.class);
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<MedicoEntity> criteriaQuery = criteriaBuilder.createQuery(MedicoEntity.class);
+        Root<MedicoEntity> medicoRoot = criteriaQuery.from(MedicoEntity.class);
 
-        // Fetch de las asociaciones usando las anotaciones definidas en las entidades
-        medicoRoot.fetch("especialidad", JoinType.INNER);
-        medicoRoot.fetch("horario", JoinType.INNER);
-        medicoRoot.fetch("ciudad", JoinType.INNER);
+        // Joins con las tablas relacionadas
+        Join<MedicoEntity, EspecialidadEntity> especialidadJoin = medicoRoot.join("especialidades");
+        Join<MedicoEntity, HorarioEntity> horarioJoin = medicoRoot.join("horarios");
+        Join<MedicoEntity, CiudadEntity> ciudadJoin = medicoRoot.join("ciudad");
 
-        cq.select(medicoRoot)
-                .distinct(true); // Para evitar resultados duplicados si un médico tiene múltiples especialidades
+        criteriaQuery.select(medicoRoot).distinct(true);
+        criteriaQuery.where(criteriaBuilder.equal(especialidadJoin.get("idEspecialidad"), idEspecialidad));
 
-        TypedQuery<MedicoEntity> query = em.createQuery(cq);
-        List<MedicoEntity> medicos = query.getResultList();
-
-        em.close();
-        return medicos;
+        return em.createQuery(criteriaQuery).getResultList();
     }
 }

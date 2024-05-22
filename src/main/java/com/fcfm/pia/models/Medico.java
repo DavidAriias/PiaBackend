@@ -7,11 +7,11 @@ public class Medico {
     private Long Id;
     private String nombre;
     private String apellidos;
-    private String especialidad;
+    private List<Especialidad> especialidad;
     private List<Horario> horario;
-    private String ciudad;
+    private Ciudad ciudad;
 
-    public Medico(Long id, String nombre, String apellidos, String especialidad, List<Horario> horario, String ciudad){
+    public Medico(Long id, String nombre, String apellidos, List<Especialidad> especialidad, List<Horario> horario, Ciudad ciudad){
         this.Id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -20,11 +20,11 @@ public class Medico {
         this.ciudad = ciudad;
     }
 
-    public void setEspecialidad(String especialidad) {
+    public void setEspecialidad(List<Especialidad> especialidad) {
         this.especialidad = especialidad;
     }
 
-    public String getEspecialidad() {
+    public List<Especialidad> getEspecialidad() {
         return especialidad;
     }
 
@@ -52,11 +52,11 @@ public class Medico {
         this.apellidos = apellidos;
     }
 
-    public String getCiudad() {
+    public Ciudad getCiudad() {
         return ciudad;
     }
 
-    public void setCiudad(String ciudad) {
+    public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
 

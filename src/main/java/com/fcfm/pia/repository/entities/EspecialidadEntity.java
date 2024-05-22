@@ -8,20 +8,17 @@ public class EspecialidadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_especialidad", nullable = false)
     private Long idEspecialidad;
 
-    @Column(name = "especialidad")
     private String especialidad;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_medico")
-    private MedicoEntity medico;
-
-    //setters y getters
-
+    // Getters and setters
     public Long getIdEspecialidad() {
         return idEspecialidad;
+    }
+
+    public void setIdEspecialidad(Long idEspecialidad) {
+        this.idEspecialidad = idEspecialidad;
     }
 
     public String getEspecialidad() {
@@ -30,17 +27,5 @@ public class EspecialidadEntity {
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
-    }
-
-    public void setIdEspecialidad(Long idEspecialidad) {
-        this.idEspecialidad = idEspecialidad;
-    }
-
-    public MedicoEntity getMedico() {
-        return medico;
-    }
-
-    public void setMedico(MedicoEntity medico) {
-        this.medico = medico;
     }
 }

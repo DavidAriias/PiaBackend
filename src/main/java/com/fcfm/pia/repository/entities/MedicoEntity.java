@@ -5,37 +5,47 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "medicos", schema = "public")
+@Table(name = "medicos",  schema = "public")
 public class MedicoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_medico")
-    private Long id;
+    private Long idMedico;
 
     @Column(name = "nombre")
     private String nombre;
+
     @Column(name = "apellidos")
     private String apellidos;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_ciudad")
     private CiudadEntity ciudad;
 
-    //Estos son donde se usa id_medico
-    @OneToMany(mappedBy = "medico")
-    private List<HorarioEntity> horario;
-    @OneToMany(mappedBy = "medico")
-    private List<EspecialidadEntity> especialidad;
+    @ManyToMany
+    @JoinTable(
+            name = "medico_especialidades",
+            joinColumns = @JoinColumn(name = "id_medico"),
+            inverseJoinColumns = @JoinColumn(name = "id_especialidad")
+    )
+    private List<EspecialidadEntity> especialidades;
 
-    // Constructor, Getters y Setters
+    @ManyToMany
+    @JoinTable(
+            name = "medico_horarios",
+            joinColumns = @JoinColumn(name = "id_medico"),
+            inverseJoinColumns = @JoinColumn(name = "id_horario")
+    )
+    private List<HorarioEntity> horarios;
 
-    public Long getId() {
-        return id;
+    // Getters and setters
+    public Long getIdMedico() {
+        return idMedico;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdMedico(Long idMedico) {
+        this.idMedico = idMedico;
     }
 
     public String getNombre() {
@@ -62,19 +72,19 @@ public class MedicoEntity {
         this.ciudad = ciudad;
     }
 
-    public List<HorarioEntity> getHorario() {
-        return horario;
+    public List<EspecialidadEntity> getEspecialidades() {
+        return especialidades;
     }
 
-    public void setHorario(List<HorarioEntity> horario) {
-        this.horario = horario;
+    public void setEspecialidades(List<EspecialidadEntity> especialidades) {
+        this.especialidades = especialidades;
     }
 
-    public List<EspecialidadEntity> getEspecialidad() {
-        return especialidad;
+    public List<HorarioEntity> getHorarios() {
+        return horarios;
     }
 
-    public void setEspecialidad(List<EspecialidadEntity> especialidad) {
-        this.especialidad = especialidad;
+    public void setHorarios(List<HorarioEntity> horarios) {
+        this.horarios = horarios;
     }
 }

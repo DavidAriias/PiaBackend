@@ -10,24 +10,18 @@ public class MedicoMapper {
 
     public static Medico MedicoEntityToMedicoModel(MedicoEntity medicoEntity){
         return new Medico(
-                medicoEntity.getId(),
+                medicoEntity.getIdMedico(),
                 medicoEntity.getNombre(),
                 medicoEntity.getApellidos(),
-
-
-                //creo que no deberia ser asi pero luego lo cambio
-                medicoEntity.getEspecialidad().toString(),
-                /*medicoEntity.getEspecialidad()
+                medicoEntity.getEspecialidades()
                         .stream()
                         .map(EspecialidadMapper::EspecilidadEntityToEspecilidadModel)
-                        .collect(Collectors.toList()),*/
-
-
-                medicoEntity.getHorario()
-                        .stream()
-                        .map(HorarioMapper::HorarioEntityToHorarioModel)
                         .collect(Collectors.toList()),
-                medicoEntity.getCiudad().getCiudad()
+                medicoEntity.getHorarios()
+                                .stream()
+                                .map(HorarioMapper::HorarioEntityToHorarioModel)
+                                .collect(Collectors.toList()),
+                CiudadMapper.CiudadEntityToCiudadModel(medicoEntity.getCiudad())
         );
     }
 }

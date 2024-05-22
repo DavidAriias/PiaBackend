@@ -8,28 +8,24 @@ public class HorarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_horario")
-    private Long id;
+    private Long idHorario;
 
-    @Column(name = "dia_semana")
+    @Column(name = "dia_semana", nullable = false)
     private String diaSemana;
 
-    @Column(name = "horario_inicio")
+    @Column(name = "horario_inicio", nullable = false)
     private String horarioInicio;
 
-    @Column(name = "horario_fin")
+    @Column(name = "horario_fin", nullable = false)
     private String horarioFin;
 
-    @ManyToOne
-    @JoinColumn(name = "id_medico")
-    private MedicoEntity medico;
-
     // Getters y Setters
-    public Long getId() {
-        return id;
+    public Long getIdHorario() {
+        return idHorario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdHorario(Long idHorario) {
+        this.idHorario = idHorario;
     }
 
     public String getDiaSemana() {
@@ -55,15 +51,5 @@ public class HorarioEntity {
     public void setHorarioFin(String horarioFin) {
         this.horarioFin = horarioFin;
     }
-
-    public MedicoEntity getMedico() {
-        return medico;
-    }
-
-    public void setMedico(MedicoEntity medico) {
-        this.medico = medico;
-    }
-
-
 
 }

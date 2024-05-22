@@ -1,31 +1,23 @@
 package com.fcfm.pia.repository.entities;
 
 import jakarta.persistence.*;
-
-import java.util.List;
-
 @Entity
 @Table(name = "ciudades", schema = "public")
 public class CiudadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_ciudad")
-    private Long id;
+    private Integer idCiudad;
 
-    @Column(name = "ciudad")
     private String ciudad;
 
-    @OneToMany(mappedBy = "ciudad")
-    private List<MedicoEntity> medicos;
-
-    // Getters y Setters
-    public Long getId() {
-        return id;
+    // Getters and setters
+    public Integer getIdCiudad() {
+        return idCiudad;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdCiudad(Integer idCiudad) {
+        this.idCiudad = idCiudad;
     }
 
     public String getCiudad() {
@@ -34,13 +26,5 @@ public class CiudadEntity {
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
-    }
-
-    public List<MedicoEntity> getMedicos() {
-        return medicos;
-    }
-
-    public void setMedicos(List<MedicoEntity> medicos) {
-        this.medicos = medicos;
     }
 }
