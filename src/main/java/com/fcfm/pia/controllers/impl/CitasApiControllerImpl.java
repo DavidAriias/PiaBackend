@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class CitasApiControllerImpl implements CitasApiController {
 
     private CitasService citasService;
-
-
    
     @Autowired
     CitasApiControllerImpl(CitasService citasService){

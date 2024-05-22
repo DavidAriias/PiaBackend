@@ -1,7 +1,6 @@
 package com.fcfm.pia.controllers.interfaces;
 
-import com.fcfm.pia.models.Medico;
-import org.springframework.format.annotation.DateTimeFormat;
+import io.swagger.v3.oas.annotations.media.SchemaProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +15,9 @@ public interface MedicosApiController {
     @GetMapping("{idEspecialidad}")
     ResponseEntity<?> getMedicosByEspecialidad(@PathVariable("idEspecialidad") Long idEspecialidad);
 
-    @GetMapping
+    @GetMapping("disponibilidad")
     ResponseEntity<?> getMedicosByRangoHorario(
-            @RequestParam("horaInicio") @DateTimeFormat(pattern = "HH:mm") LocalTime horaInicio,
-            @RequestParam("horaFin") @DateTimeFormat(pattern = "HH:mm") LocalTime horaFin
+            @RequestParam("horaInicio") String horaInicio,
+            @RequestParam("horaFin") String horaFin
             );
 }

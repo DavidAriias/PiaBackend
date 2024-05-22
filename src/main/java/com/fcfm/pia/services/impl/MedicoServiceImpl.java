@@ -28,4 +28,13 @@ public class MedicoServiceImpl implements MedicoService {
                 .map(MedicoMapper::MedicoEntityToMedicoModel)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Medico> getMedicosByRangoHorario(String horarioInicio, String horarioFin) {
+        var medicosEntity = this.medicoRepository.getMedicosByRangoHorario(horarioInicio,horarioFin);
+
+        return medicosEntity.stream()
+                .map(MedicoMapper::MedicoEntityToMedicoModel)
+                .collect(Collectors.toList());
+    }
 }
