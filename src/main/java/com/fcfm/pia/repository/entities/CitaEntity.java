@@ -2,17 +2,19 @@ package com.fcfm.pia.repository.entities;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "citas", schema = "public")
 public class CitaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cita_estatus")
+    @Column(name = "id_cita")
     private Long id;
 
     @Column(name = "fecha_cita")
-    private String fechaCita;
+    private Timestamp fechaCita;
 
     @ManyToOne
     @JoinColumn(name = "id_medico")
@@ -26,6 +28,17 @@ public class CitaEntity {
     @JoinColumn(name = "id_paciente")
     private PacienteEntity paciente;
 
+    public CitaEntity(MedicoEntity medico, CitaEstatusEntity estatus, PacienteEntity paciente,Timestamp fechaCita) {
+        this.medico = medico;
+        this.estatus = estatus;
+        this.paciente = paciente;
+        this.fechaCita = fechaCita;
+    }
+
+    public CitaEntity() {
+
+    }
+
     //setters y getters
     public Long getId() {
         return id;
@@ -35,11 +48,11 @@ public class CitaEntity {
         this.id = id;
     }
 
-    public String getFechaCita() {
+    public Timestamp getFechaCita() {
         return fechaCita;
     }
 
-    public void setFechaCita(String fechaCita) {
+    public void setFechaCita(Timestamp fechaCita) {
         this.fechaCita = fechaCita;
     }
 

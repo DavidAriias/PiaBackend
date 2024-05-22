@@ -1,21 +1,25 @@
 package com.fcfm.pia.models;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 public class Cita {
     private Long Id;
-    private Long IdMedico;
-    private Long IdEstatus;
-    private Long IdPaciente;
-    private Date fechaCita;
+    private Long idMedico;
+    private Long idEstatus;
+    private Long idPaciente;
+    private Timestamp fechaCita;
 
-    public Cita(Long id, Long idMedico, Long idEstatus, Long idPaciente, Date fechaCita) {
-        Id = id;
-        IdMedico = idMedico;
-        IdEstatus = idEstatus;
-        IdPaciente = idPaciente;
+    public Cita(Long idMedico, Long idEstatus, Long idPaciente, Timestamp fechaCita) {
+        this.idMedico = idMedico;
+        this.idEstatus = idEstatus;
+        this.idPaciente = idPaciente;
         this.fechaCita = fechaCita;
+    }
+
+    public Cita() {
+
     }
 
     public Long getId() {
@@ -27,34 +31,34 @@ public class Cita {
     }
 
     public Long getIdMedico() {
-        return IdMedico;
+        return idMedico;
     }
 
     public void setIdMedico(Long idMedico) {
-        IdMedico = idMedico;
+        this.idMedico = idMedico;
     }
 
     public Long getIdEstatus() {
-        return IdEstatus;
+        return idEstatus;
     }
 
     public void setIdEstatus(Long idEstatus) {
-        IdEstatus = idEstatus;
+        this.idEstatus = idEstatus;
     }
 
     public Long getIdPaciente() {
-        return IdPaciente;
+        return idPaciente;
     }
 
     public void setIdPaciente(Long idPaciente) {
-        IdPaciente = idPaciente;
+        this.idPaciente = idPaciente;
     }
 
-    public Date getFechaCita() {
+    public Timestamp getFechaCita() {
         return fechaCita;
     }
 
-    public void setFechaCita(Date fechaCita) {
+    public void setFechaCita(Timestamp fechaCita) {
         this.fechaCita = fechaCita;
     }
 }
