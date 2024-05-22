@@ -42,11 +42,16 @@ public class CitasApiControllerImpl implements CitasApiController {
         }
     }
 
-
     @Override
     public ResponseEntity<?> getCita(long idCita) {
         try {
-            return ResponseEntity.ok().body(citasService.getCita(idCita));
+            if (idCita <= 0) return ResponseEntity.badRequest().body("El id de la cita no puede ser igual o menor a cero");
+
+            var citaResponse = citasService.getCita(idCita);
+
+            if (citaResponse.isPresent()) return ResponseEntity.ok().body(citaResponse);
+            else return ResponseEntity.badRequest().body("No se ha encontrado la cita con ese id");
+
         } catch (Exception ex){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }

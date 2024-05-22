@@ -9,6 +9,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CitasRepositoyImpl implements CitasRepository {
@@ -27,8 +28,9 @@ public class CitasRepositoyImpl implements CitasRepository {
     }
 
     @Override
-    public CitaEntity getCita(long idCita) {
-        return em.find(CitaEntity.class, idCita);
+    public Optional<CitaEntity> getCita(long idCita) {
+        CitaEntity cita = em.find(CitaEntity.class, idCita);
+        return Optional.ofNullable(cita);
     }
 
     @Override

@@ -2,58 +2,39 @@ package com.fcfm.pia.repository.entities;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "citas", schema = "public")
+@Table(name = "citas")
 public class CitaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cita")
-    private Long id;
-
-    @Column(name = "fecha_cita")
-    private Timestamp fechaCita;
+    private Long idCita;
 
     @ManyToOne
-    @JoinColumn(name = "id_medico")
+    @JoinColumn(name = "id_medico", nullable = false)
     private MedicoEntity medico;
 
     @ManyToOne
-    @JoinColumn(name = "id_estatus")
+    @JoinColumn(name = "id_estatus", nullable = false)
     private CitaEstatusEntity estatus;
 
     @ManyToOne
-    @JoinColumn(name = "id_paciente")
+    @JoinColumn(name = "id_paciente", nullable = false)
     private PacienteEntity paciente;
 
-    public CitaEntity(MedicoEntity medico, CitaEstatusEntity estatus, PacienteEntity paciente,Timestamp fechaCita) {
-        this.medico = medico;
-        this.estatus = estatus;
-        this.paciente = paciente;
-        this.fechaCita = fechaCita;
+    @Column(name = "fecha_cita", nullable = false)
+    private String fechaCita;
+
+    // Getters and setters
+    public Long getIdCita() {
+        return idCita;
     }
 
-    public CitaEntity() {
-
-    }
-
-    //setters y getters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Timestamp getFechaCita() {
-        return fechaCita;
-    }
-
-    public void setFechaCita(Timestamp fechaCita) {
-        this.fechaCita = fechaCita;
+    public void setIdCita(Long idCita) {
+        this.idCita = idCita;
     }
 
     public MedicoEntity getMedico() {
@@ -78,5 +59,13 @@ public class CitaEntity {
 
     public void setPaciente(PacienteEntity paciente) {
         this.paciente = paciente;
+    }
+
+    public String getFechaCita() {
+        return fechaCita;
+    }
+
+    public void setFechaCita(String fechaCita) {
+        this.fechaCita = fechaCita;
     }
 }

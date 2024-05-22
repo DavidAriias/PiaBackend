@@ -7,7 +7,6 @@ public class CitaEstatus {
     private Long Id;
     private String estatus;
 
-
     public CitaEstatus(Long id, String estatus) {
         Id = id;
         this.estatus = estatus;

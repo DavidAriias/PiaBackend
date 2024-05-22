@@ -3,26 +3,24 @@ package com.fcfm.pia.repository.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cita_estatus", schema = "public")
+@Table(name = "cita_estatus")
 public class CitaEstatusEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cita_estatus")
-    private Long id;
+    private Long idCitaEstatus;
 
-    @Column(name = "estatus")
+    @Column(name = "estatus", nullable = false)
     private String estatus;
 
-
-    //setters y getters
-
-
-    public Long getId() {
-        return id;
+    // Getters and setters
+    public Long getIdCitaEstatus() {
+        return idCitaEstatus;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdCitaEstatus(Long idCitaEstatus) {
+        this.idCitaEstatus = idCitaEstatus;
     }
 
     public String getEstatus() {

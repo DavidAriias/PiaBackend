@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CitasServiceImpl implements CitasService {
@@ -36,9 +37,16 @@ public class CitasServiceImpl implements CitasService {
 
     //entity to model
     @Override
-    public Cita getCita(long idCita) {
-        CitaEntity citaEntity = citasRepository.getCita(idCita);
-        return CitaMapper.CitaEntitytoCitaModel(citaEntity);
+    public Optional<Cita> getCita(long idCita) {
+        Optional<CitaEntity> citaEntity = citasRepository.getCita(idCita);
+
+        // Si citaEntity está presente, mapear a Cita, de lo contrario retornar un Optional vacío
+        if (citaEntity.isPresent()) {
+            Cita cita = CitaMapper.CitaEntityToCitaModel(citaEntity.get());
+            return Optional.ofNullable(cita);
+        } else {
+            return Optional.empty();
+        }
     }
 
     //model to entity...y de nuevo a model?

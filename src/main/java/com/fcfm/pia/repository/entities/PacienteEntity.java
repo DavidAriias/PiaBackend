@@ -5,24 +5,25 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "pacientes", schema = "public")
 public class PacienteEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_paciente")
-    private Long id;
+    private Long idPaciente;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false)
     private String nombre;
-    @Column(name = "apellidos")
+
+    @Column(name = "apellidos", nullable = false)
     private String apellidos;
 
-
-    //Setters y getters
-    public Long getId() {
-        return id;
+    // Getters and setters
+    public Long getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPaciente(Long idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     public String getNombre() {
@@ -40,6 +41,4 @@ public class PacienteEntity {
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
-
-    
 }
