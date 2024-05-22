@@ -56,4 +56,21 @@ public class MedicoRepositoryImpl implements MedicoRepository {
 
         return em.createQuery(criteriaQuery).getResultList();
     }
+
+    @Override
+    public List<MedicoEntity> getMedicosByCiudad(Long idCiudad) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<MedicoEntity> criteriaQuery = criteriaBuilder.createQuery(MedicoEntity.class);
+        Root<MedicoEntity> medicoRoot = criteriaQuery.from(MedicoEntity.class);
+
+        // Joins con las tablas relacionadas
+        Join<MedicoEntity, EspecialidadEntity> especialidadJoin = medicoRoot.join("especialidades");
+        Join<MedicoEntity, HorarioEntity> horarioJoin = medicoRoot.join("horarios");
+        Join<MedicoEntity, CiudadEntity> ciudadJoin = medicoRoot.join("ciudad");
+
+        criteriaQuery.select(medicoRoot).distinct(true);
+        criteriaQuery.where(criteriaBuilder.equal(ciudadJoin.get("idCiudad"), idCiudad));
+
+        return em.createQuery(criteriaQuery).getResultList();
+    }
 }

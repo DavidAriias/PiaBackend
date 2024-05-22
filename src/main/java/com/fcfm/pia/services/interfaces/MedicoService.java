@@ -7,4 +7,5 @@ import java.util.List;
 public interface MedicoService {
     List<Medico> getMedicosByEspecialidad(Long idEspecialidad);
     List<Medico> getMedicosByRangoHorario(String horarioInicio, String horarioFin);
+    List<Medico> getMedicosByCiudad(Long idCiudad);
 }

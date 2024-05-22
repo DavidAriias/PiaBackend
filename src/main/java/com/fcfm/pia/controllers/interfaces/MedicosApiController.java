@@ -20,4 +20,7 @@ public interface MedicosApiController {
             @RequestParam("horaInicio") String horaInicio,
             @RequestParam("horaFin") String horaFin
             );
+
+    @GetMapping("ciudad/{idCiudad}")
+    ResponseEntity<?> getMedicosByCiudad(@PathVariable("idCiudad") Long idCiudad);
 }

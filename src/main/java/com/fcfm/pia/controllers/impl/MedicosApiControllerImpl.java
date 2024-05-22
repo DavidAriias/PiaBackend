@@ -51,4 +51,19 @@ public class MedicosApiControllerImpl implements MedicosApiController {
                     .body(e.getMessage());
         }
     }
+
+    @Override
+    public ResponseEntity<?> getMedicosByCiudad(Long idCiudad) {
+        try{
+            if (idCiudad <= 0) return ResponseEntity.badRequest().body("El id debe ser mayor a cero");
+
+            return ResponseEntity.ok().body(
+                    medicoService.getMedicosByCiudad(idCiudad)
+            );
+        } catch (Exception e){
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(e.getMessage());
+        }
+    }
 }

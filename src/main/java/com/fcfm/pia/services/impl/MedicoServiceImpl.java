@@ -37,4 +37,13 @@ public class MedicoServiceImpl implements MedicoService {
                 .map(MedicoMapper::MedicoEntityToMedicoModel)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Medico> getMedicosByCiudad(Long idCiudad) {
+        var medicosEntity = this.medicoRepository.getMedicosByCiudad(idCiudad);
+
+        return medicosEntity.stream()
+                .map(MedicoMapper::MedicoEntityToMedicoModel)
+                .collect(Collectors.toList());
+    }
 }
