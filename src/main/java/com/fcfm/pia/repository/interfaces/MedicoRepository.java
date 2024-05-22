@@ -8,4 +8,5 @@ public interface MedicoRepository {
     List<MedicoEntity> getMedicosByEspecialidad(Long idEspecialidad);
     List<MedicoEntity> getMedicosByRangoHorario(String horarioInicio, String horarioFin);
     List<MedicoEntity> getMedicosByCiudad(Long idCiudad);
+    List<MedicoEntity> getMedicosByFiltros(Long idEspecialidad, String horaInicio, String horaFin, Long idCiudad);
 }

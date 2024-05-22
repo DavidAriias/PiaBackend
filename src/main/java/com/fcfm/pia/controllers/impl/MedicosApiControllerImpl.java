@@ -66,4 +66,24 @@ public class MedicosApiControllerImpl implements MedicosApiController {
                     .body(e.getMessage());
         }
     }
+
+    @Override
+    public ResponseEntity<?> getMedicosByFiltros(Long idEspecialidad, String horaInicio, String horaFin, Long idCiudad) {
+        try{
+            if (horaFin != null && !ValidateHour.validarFormatoHora(horaFin) || horaInicio != null && !ValidateHour.validarFormatoHora(horaInicio))
+                return ResponseEntity.badRequest().body("No es valido el formato de hora, debe ser HH:mm");
+
+            if (idCiudad <= 0) return ResponseEntity.badRequest().body("El id de la ciudad no puede ser menor o igual a cero");
+
+            if (idEspecialidad <= 0) return ResponseEntity.badRequest().body("El id de la especialidad no puede ser menor o igual a cero");
+
+            return ResponseEntity.ok().body(
+                    medicoService.getMedicosByFiltros(idEspecialidad,horaInicio,horaFin,idCiudad)
+            );
+        } catch (Exception e){
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(e.getMessage());
+        }
+    }
 }

@@ -12,7 +12,7 @@ import java.time.LocalTime;
 @RequestMapping("/medicos")
 public interface MedicosApiController {
 
-    @GetMapping("{idEspecialidad}")
+    @GetMapping("/especialidad/{idEspecialidad}")
     ResponseEntity<?> getMedicosByEspecialidad(@PathVariable("idEspecialidad") Long idEspecialidad);
 
     @GetMapping("disponibilidad")
@@ -21,6 +21,14 @@ public interface MedicosApiController {
             @RequestParam("horaFin") String horaFin
             );
 
-    @GetMapping("ciudad/{idCiudad}")
+    @GetMapping("/ciudad/{idCiudad}")
     ResponseEntity<?> getMedicosByCiudad(@PathVariable("idCiudad") Long idCiudad);
+
+    @GetMapping
+    ResponseEntity<?> getMedicosByFiltros(
+            @RequestParam(value = "idEspecialidad", required = false) Long idEspecialidad,
+            @RequestParam(value = "horaInicio", required = false) String horaInicio,
+            @RequestParam(value = "horaFin", required = false) String horaFin,
+            @RequestParam(value = "idCiudad", required = false) Long idCiudad
+    );
 }
