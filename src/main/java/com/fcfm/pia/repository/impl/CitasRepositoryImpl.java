@@ -49,7 +49,11 @@ public class CitasRepositoryImpl implements CitasRepository {
 
         if (!citas.isEmpty()) throw new RuntimeException("Error al agendar cita, ya existen cita o citas con medico y la horario solicitado");
 
-        if (cita.getPaciente().getIdPaciente() == null){}
+       var paciente = em.find(PacienteEntity.class, cita.getPaciente().getIdPaciente());
+
+       if (paciente == null) throw new RuntimeException("Error al obtener el paciente");
+
+       cita.setPaciente(paciente);
 
         // Ahora persistimos la cita
         em.persist(cita);
@@ -107,6 +111,10 @@ public class CitasRepositoryImpl implements CitasRepository {
 
         if (cita == null) {
             throw new RuntimeException("Cita no encontrada con ID: " + idCita);
+        }
+
+        if (cita.getEstatus().getIdCitaEstatus().equals(Long.parseLong(CitaEstatusEnum.CANCELADA.getValor()))){
+            throw new RuntimeException("Ya se ha cancelado esta cita");
         }
 
         var estatus = new CitaEstatusEntity();

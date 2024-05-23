@@ -34,8 +34,9 @@ public class CitasApiControllerImpl implements CitasApiController {
             if (!ValidateHour.validarFormatoHora(cita.getHorario()))
                 return ResponseEntity.badRequest().body("El horario debe ser en formato HH:mm");
 
-            citasService.setCita(CitaMapper.CitaRequestToCitaModel(cita, CitaEstatusEnum.AGENDADA));
-            return ResponseEntity.ok().body("Cita generada con exito");
+            var response = citasService.setCita(CitaMapper.CitaRequestToCitaModel(cita, CitaEstatusEnum.AGENDADA));
+
+            return ResponseEntity.ok().body(response);
         } catch (Exception ex){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }
