@@ -12,4 +12,10 @@ public class PacienteMapper {
                 pacienteEntity.getApellidos()
         );
     }
+
+    public static PacienteEntity PacienteModelToPacienteEntity(Paciente paciente){
+        return new PacienteEntity(
+
+        );
+    }
 }

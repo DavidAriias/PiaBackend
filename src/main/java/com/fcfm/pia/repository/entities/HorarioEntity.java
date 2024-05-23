@@ -10,14 +10,20 @@ public class HorarioEntity {
     @Column(name = "id_horario")
     private Long idHorario;
 
-    @Column(name = "dia_semana", nullable = false)
-    private String diaSemana;
-
     @Column(name = "horario_inicio", nullable = false)
     private String horarioInicio;
 
     @Column(name = "horario_fin", nullable = false)
     private String horarioFin;
+
+    public HorarioEntity(Long idHorario, String horarioInicio, String horarioFin){
+        this.idHorario = idHorario;
+        this.horarioInicio = horarioInicio;
+        this.horarioFin = horarioFin;
+    }
+    public HorarioEntity(){
+
+    }
 
     // Getters y Setters
     public Long getIdHorario() {
@@ -26,14 +32,6 @@ public class HorarioEntity {
 
     public void setIdHorario(Long idHorario) {
         this.idHorario = idHorario;
-    }
-
-    public String getDiaSemana() {
-        return diaSemana;
-    }
-
-    public void setDiaSemana(String diaSemana) {
-        this.diaSemana = diaSemana;
     }
 
     public String getHorarioInicio() {

@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CitasService {
-    void setCita(Cita cita);
+    Cita setCita(Cita cita);
 
-    List<Cita> getCitas(String inicio, String fin);
+    List<Cita> getCitas(String horarioInicio, String horarioFin,Long idPaciente);
 
     Optional<Cita> getCita(long idCita);
 
-    Cita updateCita(int idCita);
+    Cita updateCita(Long idCita, Cita citaRequest);
 
-    void deleteCita(int idCita);
+    Cita deleteCita(Long idCita);
 }

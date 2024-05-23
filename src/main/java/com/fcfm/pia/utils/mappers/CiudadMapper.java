@@ -11,4 +11,11 @@ public class CiudadMapper {
                 ciudadEntity.getCiudad()
         );
     }
+
+    public static CiudadEntity CiudadModelToCiudadEntity(Ciudad ciudad){
+        return new CiudadEntity(
+                ciudad.getId(),
+                ciudad.getNombre()
+        );
+    }
 }

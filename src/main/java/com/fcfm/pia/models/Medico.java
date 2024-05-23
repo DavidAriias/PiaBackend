@@ -20,6 +20,10 @@ public class Medico {
         this.ciudad = ciudad;
     }
 
+    public Medico(){
+
+    }
+
     public void setEspecialidad(List<Especialidad> especialidad) {
         this.especialidad = especialidad;
     }

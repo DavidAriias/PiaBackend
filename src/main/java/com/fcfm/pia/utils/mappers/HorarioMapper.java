@@ -6,9 +6,17 @@ import com.fcfm.pia.repository.entities.HorarioEntity;
 public class HorarioMapper {
     public static Horario HorarioEntityToHorarioModel(HorarioEntity horarioEntity){
         return new Horario(
-                horarioEntity.getHorarioInicio().toString(),
-                horarioEntity.getHorarioFin().toString(),
-                horarioEntity.getDiaSemana()
+                horarioEntity.getIdHorario(),
+                horarioEntity.getHorarioInicio(),
+                horarioEntity.getHorarioFin()
+        );
+    }
+
+    public static HorarioEntity HorarioModelToHorarioEntity(Horario horario){
+        return new HorarioEntity(
+                horario.getId(),
+                horario.getHoraInicio(),
+                horario.getHoraFin()
         );
     }
 }

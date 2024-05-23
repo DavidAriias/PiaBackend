@@ -2,18 +2,18 @@ package com.fcfm.pia.models;
 
 public class Horario {
 
+    private Long id;
     private String horaInicio;
     private String horaFin;
-    private String diaSemana;
 
-    public Horario(String horaInicio,String horaFin, String diaSemana){
+    public Horario(Long id,String horaInicio,String horaFin){
+        this.id = id;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
-        this.diaSemana = diaSemana;
     }
 
-    public String getDiaSemana() {
-        return diaSemana;
+    public Long getId() {
+        return id;
     }
 
     public String getHoraFin() {
@@ -24,15 +24,15 @@ public class Horario {
         return horaInicio;
     }
 
-    public void setDiaSemana(String diaSemana) {
-        this.diaSemana = diaSemana;
-    }
-
     public void setHoraFin(String horaFin) {
         this.horaFin = horaFin;
     }
 
     public void setHoraInicio(String horaInicio) {
         this.horaInicio = horaInicio;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

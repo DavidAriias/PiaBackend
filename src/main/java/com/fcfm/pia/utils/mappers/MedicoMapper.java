@@ -24,4 +24,21 @@ public class MedicoMapper {
                 CiudadMapper.CiudadEntityToCiudadModel(medicoEntity.getCiudad())
         );
     }
+
+    public static MedicoEntity MedicoModelToMedicoEntity(Medico medico){
+        return new MedicoEntity(
+                medico.getId(),
+                medico.getNombre(),
+                medico.getApellidos(),
+                (medico.getCiudad() != null ) ? CiudadMapper.CiudadModelToCiudadEntity(medico.getCiudad()) : null,
+                (medico.getEspecialidad() != null) ? medico.getEspecialidad()
+                        .stream()
+                        .map(EspecialidadMapper::EspecialidadModelToEspecialidaEntity)
+                        .collect(Collectors.toList()) : null,
+                (medico.getHorario() != null) ? medico.getHorario()
+                        .stream()
+                        .map(HorarioMapper::HorarioModelToHorarioEntity)
+                        .collect(Collectors.toList()) : null
+        );
+    }
 }

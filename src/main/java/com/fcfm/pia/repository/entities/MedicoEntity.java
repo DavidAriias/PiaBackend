@@ -39,6 +39,16 @@ public class MedicoEntity {
     )
     private List<HorarioEntity> horarios;
 
+    public MedicoEntity(Long idMedico,String nombre, String apellidos,CiudadEntity ciudad, List<EspecialidadEntity> especialidades,List<HorarioEntity> horarios){
+        this.idMedico = idMedico;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.ciudad = ciudad;
+        this.especialidades = especialidades;
+        this.horarios = horarios;
+    }
+    public MedicoEntity(){}
+
     // Getters and setters
     public Long getIdMedico() {
         return idMedico;

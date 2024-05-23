@@ -2,8 +2,6 @@ package com.fcfm.pia.repository.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "citas")
 public class CitaEntity {
@@ -13,22 +11,32 @@ public class CitaEntity {
     @Column(name = "id_cita")
     private Long idCita;
 
-    @ManyToOne
-    @JoinColumn(name = "id_medico", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "id_medico")
     private MedicoEntity medico;
 
-    @ManyToOne
-    @JoinColumn(name = "id_estatus", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "id_estatus")
     private CitaEstatusEntity estatus;
 
-    @ManyToOne
-    @JoinColumn(name = "id_paciente", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "id_paciente")
     private PacienteEntity paciente;
 
     @Column(name = "fecha_cita", nullable = false)
     private String fechaCita;
 
-    // Getters and setters
+    // Constructor vacío y constructor con parámetros
+    public CitaEntity(Long idCita, MedicoEntity medico, CitaEstatusEntity estatus, PacienteEntity paciente, String fechaCita) {
+        this.idCita = idCita;
+        this.medico = medico;
+        this.estatus = estatus;
+        this.paciente = paciente;
+        this.fechaCita = fechaCita;
+    }
+
+    public CitaEntity(){}
+    // Getters y setters
     public Long getIdCita() {
         return idCita;
     }

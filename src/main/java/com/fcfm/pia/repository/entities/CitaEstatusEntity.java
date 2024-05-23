@@ -14,6 +14,12 @@ public class CitaEstatusEntity {
     @Column(name = "estatus", nullable = false)
     private String estatus;
 
+    public CitaEstatusEntity(Long idCitaEstatus, String estatus){
+        this.idCitaEstatus = idCitaEstatus;
+        this.estatus = estatus;
+    }
+    public CitaEstatusEntity(){}
+
     // Getters and setters
     public Long getIdCitaEstatus() {
         return idCitaEstatus;

@@ -15,6 +15,8 @@ public class Paciente {
         this.apellidos = apellidos;
     }
 
+    public Paciente(){}
+
     //getters y setters
     public Long getId() {
         return Id;

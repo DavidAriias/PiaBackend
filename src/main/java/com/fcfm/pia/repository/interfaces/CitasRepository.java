@@ -1,19 +1,22 @@
 package com.fcfm.pia.repository.interfaces;
 
-import com.fcfm.pia.models.Cita;
 import com.fcfm.pia.repository.entities.CitaEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CitasRepository {
-    void setCita(Cita cita);
+    @Transactional
+    CitaEntity setCita(CitaEntity cita);
 
-    List<CitaEntity> getCitas(String inicio, String fin);
+    List<CitaEntity> getCitas(String horarioInicio, String horarioFin, Long idPaciente);
 
     Optional<CitaEntity> getCita(long idCita);
 
-    CitaEntity updateCita(int idCita);
+    @Transactional
+    CitaEntity updateCita(Long idCita, CitaEntity cita);
 
-    void deleteCita(int idCita);
+    @Transactional
+    CitaEntity deleteCita(Long idCita);
 }

@@ -7,16 +7,22 @@ public class CiudadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCiudad;
+    private Long idCiudad;
 
     private String ciudad;
 
+    public CiudadEntity(Long idCiudad, String ciudad){
+        this.idCiudad = idCiudad;
+        this.ciudad = ciudad;
+    }
+    public CiudadEntity(){}
+
     // Getters and setters
-    public Integer getIdCiudad() {
+    public Long getIdCiudad() {
         return idCiudad;
     }
 
-    public void setIdCiudad(Integer idCiudad) {
+    public void setIdCiudad(Long idCiudad) {
         this.idCiudad = idCiudad;
     }
 

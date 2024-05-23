@@ -12,6 +12,12 @@ public class EspecialidadEntity {
 
     private String especialidad;
 
+    public EspecialidadEntity(Long idEspecialidad, String especialidad){
+        this.idEspecialidad = idEspecialidad;
+        this.especialidad = especialidad;
+    }
+    public EspecialidadEntity(){}
+
     // Getters and setters
     public Long getIdEspecialidad() {
         return idEspecialidad;

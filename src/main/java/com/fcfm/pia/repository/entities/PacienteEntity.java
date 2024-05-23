@@ -17,6 +17,13 @@ public class PacienteEntity {
     @Column(name = "apellidos", nullable = false)
     private String apellidos;
 
+    public PacienteEntity(Long idPaciente, String nombre, String apellidos){
+        this.idPaciente = idPaciente;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+    }
+    public PacienteEntity(){}
+
     // Getters and setters
     public Long getIdPaciente() {
         return idPaciente;

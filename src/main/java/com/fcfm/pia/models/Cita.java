@@ -1,9 +1,5 @@
 package com.fcfm.pia.models;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 public class Cita {
     private Long Id;
@@ -20,7 +16,9 @@ public class Cita {
         this.fechaCita = fechaCita;
     }
 
+    public Cita(){
 
+    }
     public Long getId() {
         return Id;
     }

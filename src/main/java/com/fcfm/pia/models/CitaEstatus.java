@@ -12,6 +12,10 @@ public class CitaEstatus {
         this.estatus = estatus;
     }
 
+    public CitaEstatus(){
+
+    }
+
     public Long getId() {
         return Id;
     }
