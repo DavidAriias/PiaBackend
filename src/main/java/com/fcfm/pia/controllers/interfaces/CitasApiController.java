@@ -19,6 +19,7 @@ public interface CitasApiController {
     //listado de citas entre dos fechas (info completa incluyendo estatus)
     @GetMapping("/")
     ResponseEntity<?> getCitas(
+            @RequestParam("idPaciente") Long idPaciente,
             @RequestParam("horarioInicio") String horarioInicio,
             @RequestParam("horarioFin") String horarioFin
     );

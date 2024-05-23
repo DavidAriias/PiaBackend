@@ -44,12 +44,12 @@ public class CitasApiControllerImpl implements CitasApiController {
 
     //este lo voy a dejar para el ultimo xd
     @Override
-    public ResponseEntity<?> getCitas(String horarioInicio, String horarioFin) {
+    public ResponseEntity<?> getCitas(Long idPaciente,String horarioInicio, String horarioFin) {
         try {
             if (!ValidateHour.validarFormatoHora(horarioInicio) || !ValidateHour.validarFormatoHora(horarioFin))
                 return ResponseEntity.badRequest().body("No es valido el formato de hora, debe ser HH:mm");
 
-            return ResponseEntity.ok().body(citasService.getCitas(horarioInicio, horarioFin, Long.parseLong("1")));
+            return ResponseEntity.ok().body(citasService.getCitas(horarioInicio, horarioFin,idPaciente));
         } catch (Exception ex){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }
