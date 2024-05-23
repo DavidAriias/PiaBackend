@@ -1,6 +1,5 @@
 package com.fcfm.pia.repository.impl;
 
-import com.fcfm.pia.models.Cita;
 import com.fcfm.pia.models.enums.CitaEstatusEnum;
 import com.fcfm.pia.repository.entities.*;
 import com.fcfm.pia.repository.interfaces.CitasRepository;
@@ -98,12 +97,34 @@ public class CitasRepositoryImpl implements CitasRepository {
         if (citaExistente.getEstatus().getIdCitaEstatus().equals(Long.parseLong(CitaEstatusEnum.CANCELADA.getValor()))){
             throw new RuntimeException("No se puede actualizar una cita que ha sido cancelada");
         }
-        em.merge(cita);
-        em.flush();  // Asegura que los cambios se persistan inmediatamente
-        em.refresh(cita);  // Actualiza la entidad con los datos más recientes de la base de datos
 
-        return cita;
+        var paciente = em.find(PacienteEntity.class, cita.getPaciente().getIdPaciente());
+
+        if (paciente == null) throw new RuntimeException("Error al obtener el paciente");
+
+        var medico = em.find(MedicoEntity.class, cita.getMedico().getIdMedico());
+
+        if (medico == null) throw new RuntimeException("Error al obtener al medico");
+
+        // Actualizar los campos necesarios de citaExistente con los valores de cita
+        citaExistente.setPaciente(paciente);
+        citaExistente.setMedico(medico);
+
+        var estatus = new CitaEstatusEntity();
+
+        estatus.setIdCitaEstatus(Long.parseLong(CitaEstatusEnum.REPROGRAMADA.getValor()));
+        estatus.setEstatus(CitaEstatusEnum.REPROGRAMADA.name());
+        citaExistente.setEstatus(estatus);
+
+        citaExistente.setFechaCita(cita.getFechaCita());
+
+        // Realizar la fusión y obtener la entidad gestionada
+        CitaEntity citaActualizada = em.merge(citaExistente);
+
+        // No es necesario hacer flush y refresh en la mayoría de los casos
+        return citaActualizada;
     }
+
 
     @Override
     public CitaEntity deleteCita(Long idCita) {
