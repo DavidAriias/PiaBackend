@@ -11,4 +11,13 @@ public class CitaEstatusMapper {
           citaEstatusEntity.getEstatus()
         );
     }
+
+    public static CitaEstatusEntity citaEstatusModelToEntity(CitaEstatus citaEstatus){
+        CitaEstatusEntity citaEstatusEntity = new CitaEstatusEntity();
+
+        //citaEstatusEntity.setIdCitaEstatus(citaEstatus.getId());
+        citaEstatusEntity.setEstatus(citaEstatus.getEstatus());
+
+        return citaEstatusEntity;
+    };
 }

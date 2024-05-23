@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CitasServiceImpl implements CitasService {
@@ -26,13 +27,15 @@ public class CitasServiceImpl implements CitasService {
     //model to entity
     @Override
     public void setCita(Cita cita) {
-        return;
+        citasRepository.setCita(CitaMapper.CitaModeltoCitaEntity(cita));
     }
 
     //entity to model
     @Override
     public List<Cita> getCitas(String inicio, String fin) {
-        return null;
+        var citasEntity = this.citasRepository.getCitas(inicio,fin);
+
+        return citasEntity.stream().map(CitaMapper::CitaEntityToCitaModel).collect(Collectors.toList());
     }
 
     //entity to model
@@ -51,13 +54,14 @@ public class CitasServiceImpl implements CitasService {
 
     //model to entity...y de nuevo a model?
     @Override
-    public Cita updateCita(int idCita) {
-        return null;
+    public Cita updateCita(long idCita, Cita cita) {
+        CitaEntity citaActualizada =  citasRepository.updateCita(idCita, CitaMapper.CitaModeltoCitaEntity(cita));
+        return CitaMapper.CitaEntityToCitaModel(citaActualizada);
     }
 
     //model to entity
     @Override
-    public void deleteCita(int idCita) {
-        return;
+    public void deleteCita(long idCita) {
+        citasRepository.deleteCita(idCita);
     }
 }

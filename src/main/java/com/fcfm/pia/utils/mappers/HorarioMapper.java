@@ -11,4 +11,13 @@ public class HorarioMapper {
                 horarioEntity.getDiaSemana()
         );
     }
+    public static HorarioEntity HorarioModelToHorarioEntity(Horario horario){
+        HorarioEntity horarioEntity = new HorarioEntity();
+
+        horarioEntity.setHorarioInicio(horario.getHoraInicio());
+        horarioEntity.setHorarioFin(horario.getHoraFin());
+        horarioEntity.setDiaSemana(horario.getDiaSemana());
+
+        return horarioEntity;
+    };
 }

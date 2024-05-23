@@ -1,6 +1,7 @@
 package com.fcfm.pia.utils.mappers;
 
 import com.fcfm.pia.models.Ciudad;
+import com.fcfm.pia.repository.entities.CitaEntity;
 import com.fcfm.pia.repository.entities.CiudadEntity;
 
 public class CiudadMapper {
@@ -11,4 +12,12 @@ public class CiudadMapper {
                 ciudadEntity.getCiudad()
         );
     }
+    public static CiudadEntity CiudadModelToCiudadEntity(Ciudad ciudad){
+        CiudadEntity ciudadEntity = new CiudadEntity();
+
+        //ciudadEntity.setIdCiudad(ciudad.getId());
+        ciudadEntity.setCiudad(ciudad.getNombre());
+
+        return ciudadEntity;
+    };
 }

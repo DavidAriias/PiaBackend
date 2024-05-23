@@ -12,7 +12,7 @@ public interface CitasService {
 
     Optional<Cita> getCita(long idCita);
 
-    Cita updateCita(int idCita);
+    Cita updateCita(long idCita, Cita cita);
 
-    void deleteCita(int idCita);
+    void deleteCita(long idCita);
 }

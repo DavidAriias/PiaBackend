@@ -17,7 +17,7 @@ public interface CitasApiController {
 
 
     //listado de citas entre dos fechas (info completa incluyendo estatus)
-    @GetMapping("/")
+    @GetMapping("/rango")
     ResponseEntity<?> getCitas(
             @RequestParam("inicio") String inicio,
             @RequestParam("fin") String fin
@@ -31,11 +31,11 @@ public interface CitasApiController {
 
     //actualizar una cierta cita
     @PutMapping("/{idCita}")
-    ResponseEntity<?> updateCita(@PathVariable int idCita, @RequestBody Cita cita);
+    ResponseEntity<?> updateCita(@PathVariable long idCita, @RequestBody Cita cita);
 
     //cancelar cierta cita
     @DeleteMapping("/{idCita}")
-    ResponseEntity<?> deleteCita(@PathVariable int idCita);
+    ResponseEntity<?> deleteCita(@PathVariable long idCita);
 
 
 

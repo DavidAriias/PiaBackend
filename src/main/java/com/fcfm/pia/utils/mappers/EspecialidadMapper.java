@@ -11,4 +11,11 @@ public class EspecialidadMapper {
                 especialidadEntity.getEspecialidad()
         );
     }
+    public static EspecialidadEntity EspecialidModelToEspecialidadEntity(Especialidad especialidad){
+        EspecialidadEntity especialidadEntity = new EspecialidadEntity();
+
+        especialidadEntity.setEspecialidad(especialidad.getNombre());
+
+        return especialidadEntity;
+    };
 }

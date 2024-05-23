@@ -14,7 +14,7 @@ public class CitasApiControllerImpl implements CitasApiController {
 
     private CitasService citasService;
 
-
+    //checkpoint para ver si funciono el merge
    
     @Autowired
     CitasApiControllerImpl(CitasService citasService){
@@ -25,8 +25,9 @@ public class CitasApiControllerImpl implements CitasApiController {
     @Override
     public ResponseEntity<?> setCita(Cita cita) {
         try {
+            //antes ira una validacion
             citasService.setCita(cita);
-            return ResponseEntity.ok().body("Cita generada con exito");
+            return ResponseEntity.ok().body("Cita agendada con exito");
         } catch (Exception ex){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }
@@ -58,19 +59,33 @@ public class CitasApiControllerImpl implements CitasApiController {
     }
 
     @Override
-    public ResponseEntity<?> updateCita(int idCita, Cita cita) {
+    public ResponseEntity<?> updateCita(long idCita, Cita cita) {
         try {
-            return ResponseEntity.ok().body(citasService.updateCita(idCita));
+            if (idCita <= 0) return ResponseEntity.badRequest().body("El id de la cita no puede ser igual o menor a cero");
+
+            var citaResponse = citasService.getCita(idCita);
+
+            if (citaResponse.isPresent()) return ResponseEntity.ok().body(citasService.updateCita(idCita,cita));
+            else return ResponseEntity.badRequest().body("No se ha encontrado la cita con ese id");
+
         } catch (Exception ex){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }
     }
 
     @Override
-    public ResponseEntity<?> deleteCita(int idCita) {
+    public ResponseEntity<?> deleteCita(long idCita) {
         try {
-            citasService.deleteCita(idCita);
-            return ResponseEntity.ok().body("Cita cancelada con exito");
+            if (idCita <= 0) return ResponseEntity.badRequest().body("El id de la cita no puede ser igual o menor a cero");
+
+            var citaResponse = citasService.getCita(idCita);
+
+            if (citaResponse.isPresent()){
+                citasService.deleteCita(idCita);
+                return ResponseEntity.ok().body("Cita cancelada con exito");
+            }
+            else return ResponseEntity.badRequest().body("No se ha encontrado la cita con ese id");
+
         } catch (Exception ex){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }

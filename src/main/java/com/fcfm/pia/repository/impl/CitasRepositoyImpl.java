@@ -1,11 +1,16 @@
 package com.fcfm.pia.repository.impl;
 
-import com.fcfm.pia.models.Cita;
 import com.fcfm.pia.repository.entities.CitaEntity;
+import com.fcfm.pia.repository.entities.CitaEstatusEntity;
 import com.fcfm.pia.repository.entities.EspecialidadEntity;
 import com.fcfm.pia.repository.interfaces.CitasRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,13 +23,20 @@ public class CitasRepositoyImpl implements CitasRepository {
 
 
     @Override
-    public void setCita(Cita cita) {
-
+    public void setCita(CitaEntity cita) {
+        em.persist(cita);
     }
 
     @Override
     public List<CitaEntity> getCitas(String inicio, String fin) {
-        return null;
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<CitaEntity> criteriaQuery = criteriaBuilder.createQuery(CitaEntity.class);
+        Root<CitaEntity> citaRoot = criteriaQuery.from(CitaEntity.class);
+
+        Predicate predicate = criteriaBuilder.between(citaRoot.get("fechaCita"), inicio, fin);
+        criteriaQuery.select(citaRoot).where(predicate);
+
+        return em.createQuery(criteriaQuery).getResultList();
     }
 
     @Override
@@ -34,12 +46,34 @@ public class CitasRepositoyImpl implements CitasRepository {
     }
 
     @Override
-    public CitaEntity updateCita(int idCita) {
+    public CitaEntity updateCita(long idCita, CitaEntity cita) {
+        CitaEntity citaEntity = em.find(CitaEntity.class, idCita);
+        if (cita != null) {
+            citaEntity.setFechaCita(cita.getFechaCita());
+            citaEntity.setMedico(cita.getMedico());
+            citaEntity.setEstatus(cita.getEstatus());
+            em.merge(cita);
+            return citaEntity;
+        }
         return null;
     }
 
     @Override
-    public void deleteCita(int idCita) {
+    @Transactional
+    public void deleteCita(long idCita) {
+        CitaEntity citaEntity = em.find(CitaEntity.class, idCita);
+        CitaEstatusEntity nuevoEstatus = em.find(CitaEstatusEntity.class, 3);
 
+        try{
+            if (citaEntity != null && nuevoEstatus != null){
+
+                citaEntity.setEstatus(nuevoEstatus);
+                em.merge(citaEntity);
+            }
+
+        }
+        catch(Exception exception){
+            throw new RuntimeException(exception.getMessage());
+        }
     }
 }
